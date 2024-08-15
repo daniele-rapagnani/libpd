@@ -71,6 +71,7 @@ void sys_close_midi() {}
 void sys_reopen_midi(void) {}
 void sys_initmidiqueue(void) {}
 void sys_pollmidiqueue(void) {}
+void sys_putmidibyte(int portno, int byte) { outmidi_byte(portno, byte); }
 void sys_setmiditimediff(double inbuftime, double outbuftime) {}
 void glob_midi_setapi(void *dummy, t_floatarg f) {}
 void glob_midi_properties(t_pd *dummy, t_floatarg flongform) {}
