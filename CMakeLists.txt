@@ -4,6 +4,7 @@ project (libpd C)
 option(PD_UTILS  "Compile utilities" ON)
 option(PD_EXTRA  "Compile extras" ON)
 option(PD_MULTI  "Compile with multiple instance support" OFF)
+option(PD_CUSTOM_FS "Compile with custom filesystem support" OFF)
 option(PD_LOCALE "Set the LC_NUMERIC number format to the default C locale" ON)
 option(PD_BUILD_C_EXAMPLES "Builds C API example programs" OFF)
 
@@ -142,6 +143,7 @@ set(PD_SOURCES
     pure-data/src/x_vexp.h
     pure-data/src/x_vexp_fun.c
     pure-data/src/x_vexp_if.c
+    pure-data/src/printf.c
 )
 
 set(PD_EXTRA_SOURCES
@@ -205,6 +207,9 @@ endif()
 if (PD_MULTI)
     set(LIBPD_OUTPUT_NAME ${LIBPD_OUTPUT_NAME}-multi)
 endif()
+if (PD_CUSTOM_FS)
+    set(LIBPD_OUTPUT_NAME ${LIBPD_OUTPUT_NAME}-cfs)
+endif()
 if (WIN32)
     set_target_properties(libpd_static PROPERTIES OUTPUT_NAME ${LIBPD_OUTPUT_NAME}-static)
 else()
@@ -225,6 +230,10 @@ endif()
 
 if(PD_MULTI)
     list(APPEND LIBPD_COMPILE_DEFINITIONS PDINSTANCE=1 PDTHREADS=1)
+endif()
+
+if (PD_CUSTOM_FS)
+    list(APPEND LIBPD_COMPILE_DEFINITIONS PDCUSTOMFS=1)
 endif()
 
 if(NOT PD_LOCALE)

@@ -722,6 +722,64 @@ int libpd_get_verbose(void) {
   return sys_verbose;
 }
 
+#ifdef PDCUSTOMFS
+
+t_fsopen g_fs_open_func = NULL;
+t_fsseek g_fs_seek_func = NULL;
+t_fstell g_fs_tell_func = NULL;
+t_fswrite g_fs_write_func = NULL;
+t_fsread g_fs_read_func = NULL;
+t_fsclose g_fs_close_func = NULL;
+
+void libpd_set_fs_functions(
+    t_fsopen fs_open,
+    t_fsseek fs_seek,
+    t_fstell fs_tell,
+    t_fswrite fs_write,
+    t_fsread fs_read,
+    t_fsclose fs_close
+)
+{
+    g_fs_open_func = fs_open;
+    g_fs_seek_func = fs_seek;
+    g_fs_tell_func = fs_tell;
+    g_fs_write_func = fs_write;
+    g_fs_read_func = fs_read;
+    g_fs_close_func = fs_close;
+}
+
+t_fsfopen g_fs_fopen_func = NULL;
+t_fsfseek g_fs_fseek_func = NULL;
+t_fsftell g_fs_ftell_func = NULL;
+t_fsfwrite g_fs_fwrite_func = NULL;
+t_fsfread g_fs_fread_func = NULL;
+t_fsfflush g_fs_fflush_func = NULL;
+t_fsfdopen g_fs_fdopen_func = NULL;
+t_fsfclose g_fs_fclose_func = NULL;
+
+EXTERN void libpd_set_fsf_functions(
+    t_fsfopen fs_open,
+    t_fsfseek fs_seek,
+    t_fsftell fs_tell,
+    t_fsfwrite fs_write,
+    t_fsfread fs_read,
+    t_fsfflush fs_flush,
+    t_fsfdopen fs_fdopen,
+    t_fsfclose fs_close
+)
+{
+    g_fs_fopen_func = fs_open;
+    g_fs_fseek_func = fs_seek;
+    g_fs_ftell_func = fs_tell;
+    g_fs_fwrite_func = fs_write;
+    g_fs_fread_func = fs_read;
+    g_fs_fflush_func = fs_flush;
+    g_fs_fdopen_func = fs_fdopen;
+    g_fs_fclose_func = fs_close;
+}
+
+#endif //PDCUSTOMFS
+
 // dummy routines needed because we don't use s_file.c
 void glob_loadpreferences(t_pd *dummy, t_symbol *s) {}
 void glob_savepreferences(t_pd *dummy, t_symbol *s) {}

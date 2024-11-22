@@ -572,6 +572,30 @@ EXTERN void libpd_set_verbose(int verbose);
 /// get the verbose print state: 0 or 1
 EXTERN int libpd_get_verbose(void);
 
+#ifdef PDCUSTOMFS
+
+EXTERN void libpd_set_fs_functions(
+    t_fsopen fs_open,
+    t_fsseek fs_seek,
+    t_fstell fs_tell,
+    t_fswrite fs_write,
+    t_fsread fs_read,
+    t_fsclose fs_close
+);
+
+EXTERN void libpd_set_fsf_functions(
+    t_fsfopen fs_open,
+    t_fsfseek fs_seek,
+    t_fsftell fs_tell,
+    t_fsfwrite fs_write,
+    t_fsfread fs_read,
+    t_fsfflush fs_flush,
+    t_fsfdopen fs_fdopen,
+    t_fsfclose fs_close
+);
+
+#endif //PDCUSTOMFS
+
 #ifdef __cplusplus
 }
 #endif
