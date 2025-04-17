@@ -199,6 +199,8 @@ endif()
 add_library(libpd_static STATIC ${SOURCE_FILES})
 add_library(libpd        SHARED ${SOURCE_FILES})
 
+target_link_options(libpd PRIVATE /PDBALTPATH:$<TARGET_PDB_FILE_NAME:libpd>)
+
 # set the output library name for libpd depending on the settings
 set(LIBPD_OUTPUT_NAME     pd)
 if (WIN32)
