@@ -757,6 +757,13 @@ t_fsfflush g_fs_fflush_func = NULL;
 t_fsfdopen g_fs_fdopen_func = NULL;
 t_fsfclose g_fs_fclose_func = NULL;
 
+t_fsglob g_fs_glob_func = NULL;
+
+void libpd_set_fs_glob_function(t_fsglob fs_glob)
+{
+    g_fs_glob_func = fs_glob;
+}
+
 EXTERN void libpd_set_fsf_functions(
     t_fsfopen fs_open,
     t_fsfseek fs_seek,

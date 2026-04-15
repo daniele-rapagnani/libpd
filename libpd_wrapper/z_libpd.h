@@ -594,6 +594,8 @@ EXTERN void libpd_set_fsf_functions(
     t_fsfclose fs_close
 );
 
+EXTERN void libpd_set_fs_glob_function(t_fsglob fs_glob);
+
 #endif //PDCUSTOMFS
 
 #ifdef __cplusplus
